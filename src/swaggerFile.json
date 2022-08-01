@@ -1,0 +1,182 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "challengeIV",
+    "description": "Challenge made by Rocketseat",
+    "version": "1.0.0",
+    "contact": {
+      "email": "tiago@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Receive a name and email and create a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "exemplo": {
+                  "name": "Fulaninho da Silva",
+                  "email": "fulano@hotmail.com"
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "201": {
+            "description": "Create"
+          },
+          "400": {
+            "description": "User already exist"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "List all users",
+        "description": "Just get all users in database",
+        "response": {
+          "200": {
+            "description": "All users listed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      },
+                      "update_at": {
+                        "type": "Date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/:user_id/admin": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Turn user admin",
+        "description": "Receive a user id than turn user admin",
+        "parameters": {
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "schema": {
+            "type": "uuid"
+          },
+          "description": "User Identification"
+        },
+        "response": {
+          "201": {
+            "description": "User turned admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "update_at": {
+                      "type": "Date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User doesn't exist"
+          }
+        }
+      }
+    },
+    "/users/:user_id": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Show user profile",
+        "description": "Receive the user id from the parameters and get the user",
+        "parameters": {
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "schema": {
+            "type": "uuid"
+          },
+          "description": "User Identification"
+        },
+        "response": {
+          "200": {
+            "description": "User turned admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "Date"
+                    },
+                    "update_at": {
+                      "type": "Date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User doesn't exist"
+          }
+        }
+      }
+    }
+  }
+}
